@@ -13,6 +13,8 @@ module Service
       end
 
       def call
+        return false unless valid?
+
         tmp_present = !delete?
         delete
         tmp_present && delete?

@@ -9,14 +9,9 @@ require 'service/address/create'
 module Service
   module Address
     class CreateTest < Minitest::Test
-      def test_call
+      def test_call_success
         $address = nil
-        assert_equal true, address_create
-      end
-
-      def test_call_address
-        $address = nil
-        address_create
+        assert_equal true, address('01001-000')
         assert_equal '01001-000', $address.first.cep
         assert_equal 'Praça da Sé', $address.first.logradouro
         assert_equal 'lado ímpar', $address.first.complemento
@@ -29,8 +24,13 @@ module Service
         assert_equal '7107', $address.first.siafi
       end
 
-      def address_create
-        @address_create ||= Service::Address::Create.new(cep: '01001-000').call
+      def test_call_fail
+        $address = nil
+        assert_equal false, address(nil)
+      end
+
+      def address(cep)
+        Service::Address::Create.new(cep: cep).call
       end
     end
   end

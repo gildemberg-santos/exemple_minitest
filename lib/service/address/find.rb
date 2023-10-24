@@ -13,6 +13,8 @@ module Service
       end
 
       def call
+        return nil unless valid?
+
         @call ||= $address.select { |address| address.cep == @cep }.first
       end
     end

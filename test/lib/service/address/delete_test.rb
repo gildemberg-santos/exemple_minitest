@@ -9,10 +9,15 @@ require 'service/address/delete'
 module Service
   module Address
     class DeleteTest < Minitest::Test
-      def test_call
+      def test_call_success
         $address = []
         address_create
         assert_equal true, address_delete
+        assert_equal false, address_delete
+      end
+
+      def test_call_fail
+        $address = []
         assert_equal false, address_delete
       end
 

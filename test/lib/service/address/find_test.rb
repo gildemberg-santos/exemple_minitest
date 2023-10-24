@@ -9,7 +9,7 @@ require 'service/address/find'
 module Service
   module Address
     class FindTest < Minitest::Test
-      def test_call
+      def test_call_success
         $address = []
         address_create
         assert_equal '01001-000', address_find.cep
@@ -24,12 +24,17 @@ module Service
         assert_equal '7107', address_find.siafi
       end
 
+      def test_call_fail
+        $address = []
+        assert_nil address_find
+      end
+
       def address_create
         @address_create ||= Service::Address::Create.new(cep: '01001-000').call
       end
 
       def address_find
-        @address_find ||= Service::Address::Find.new(cep: '01001-000').call
+        Service::Address::Find.new(cep: '01001-000').call
       end
     end
   end
