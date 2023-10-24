@@ -12,7 +12,7 @@ Service::Address::Create.new(cep: '01001000').call
 puts $address
 ```
 
-## Deletrar
+## Deleta
 
 Exemplo de uso para deletar um endereço
 
@@ -32,7 +32,7 @@ Service::Address::Find.new(cep: '01001000').call
 puts $address
 ```
 
-## Test
+## Teste
 
 Rodar todos os testes
 
