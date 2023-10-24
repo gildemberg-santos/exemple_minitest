@@ -1,0 +1,25 @@
+name: Ruby Gem
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    name: Build + Publish
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Ruby 2.6
+      uses: ruby/setup-ruby@55283cc23133118229fd3f97f9336ee23a179fcf
+      with:
+        ruby-version: 2.6.x
+
+    - name: Test
+      run: rake test
